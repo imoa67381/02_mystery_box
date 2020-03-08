@@ -4,8 +4,7 @@ import random
 
 
 class Start:
-   if __name__ == '__main__':
-     def __init__(self, parent):
+    def __init__(self, parent):
 
         # GUI to get starting balance and stakes
         self.start_frame = Frame(padx=10, pady=10)
@@ -52,7 +51,7 @@ class Start:
         # Green high stakes button...
         self.lowstakes_button = Button(self.stakes_frame, text="High ($15)",
                         command=lambda: self.to_game(3),
-                        font=button_font, bg="#FF9933")
+                        font=button_font, bg="#99FF33")
         self.lowstakes_button.grid(row=0, column=2, pady=10)
 
         # Help Button
