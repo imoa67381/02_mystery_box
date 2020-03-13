@@ -18,12 +18,12 @@ class Start:
         # Initial Instructions (row 1)
 
         mystery_instructions = "Please enter a dollar amount (between $5 and $50) in the box " \
-                           "below. Then choose the stakes. The higher the stakes, " \
-                           "the more you can win!"
+                               "below. Then choose the stakes. The higher the stakes, " \
+                               "the more you can win!"
 
         self.mystery_instructions_label = Label(self.start_frame, font="Arial 10 italic",
-                                      text=mystery_instructions,
-                                   wrap=275, justify=LEFT, padx=10, pady=10)
+                                                text=mystery_instructions,
+                                                wrap=275, justify=LEFT, padx=10, pady=10)
         self.mystery_instructions_label.grid(row=1)
 
         # Entry box... (row 2)
@@ -38,26 +38,30 @@ class Start:
         button_font = "Arial 12 bold"
         # Orange low stakes button...
         self.low_stakes_button = Button(self.stakes_frame, text="Low ($5)",
-                             command=lambda: self.to_game(1),
-                             font=button_font, bg="#FF9933")
+                                        command=lambda: self.to_game(1),
+                                        font=button_font, bg="#FF9933")
         self.low_stakes_button.grid(row=0, column=0, pady=10)
 
         # Yellow medium stakes button ...
         self.medium_stakes_button = Button(self.stakes_frame, text="Medium ($10)",
-                        command=lambda: self.to_game(2),
-                        font=button_font, bg="#FF9933")
+                                           command=lambda: self.to_game(2),
+                                           font=button_font, bg="yellow")
         self.medium_stakes_button.grid(row=0, column=1, padx=5, pady=10)
 
         # Green high stakes button...
         self.high_stakes_button = Button(self.stakes_frame, text="High ($15)",
-                        command=lambda: self.to_game(3),
-                        font=button_font, bg="#99FF33")
+                                         command=lambda: self.to_game(3),
+                                         font=button_font, bg="#99FF33")
         self.high_stakes_button.grid(row=0, column=2, pady=10)
+
+        # Error Message will appear if there is an issue...
+        self.amount_error_label = Label(self.start_frame, text="", font="Arial 10")
+        self.amount_error_label.grid(row=4)
 
         # Help Button
         self.help_button = Button(self.start_frame, text="How to Play",
                                   bg="#808080", fg="white", font=button_font)
-        self.help_button.grid(row=4, pady=10)
+        self.help_button.grid(row=5, pady=10)
 
     def to_game(self, stakes):
         starting_balance = self.start_amount_entry.get()
@@ -68,7 +72,7 @@ class Start:
         has_errors = "no"
 
         # change background to white (for testing purposes) ...
-        self.start_amount_energy.config(bg="white")
+        self.start_amount_entry.config(bg="white")
         self.amount_error_label.config(text="")
 
         try:
