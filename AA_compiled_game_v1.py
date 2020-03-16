@@ -209,7 +209,7 @@ class Game:
         self.heading_label = Label(self.game_frame, text="Heading",
                                    font="Arial 24 bold", padx=10,
                                    pady=10)
-        self.heaing_label.grid(row=0)
+        self.heading_label.grid(row=0)
 
         # Balance Label
         self.balance_frame = Frame(self.game_frame)
