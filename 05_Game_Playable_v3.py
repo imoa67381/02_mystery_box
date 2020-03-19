@@ -126,22 +126,27 @@ class Game:
 
             if 0 < prize_num <= 5:
                 prize = "gold\n(${}".format(5 * stakes_multiplier)
+                back_color = "#CEA935"  # Gold Colour
                 round_winnings += 5 * stakes_multiplier
             elif 5 < prize_num <= 25:
                 prize = "silver\n(${}".format(2 * stakes_multiplier)
+                back_color = "#B7B7B5"  # Silver Colour
                 round_winnings += 2 * stakes_multiplier
             elif 25 < prize_num <= 65:
                 prize = "gold\n(${}".format(1 * stakes_multiplier)
+                back_color = "#BC7F61"  # Copper Colour
                 round_winnings += stakes_multiplier
             else:
                 prize = "lead\n($0)"
+                back_color = "#595E71"  # Lead Colour
 
             prizes.append(prize)
+            backgrounds.append(back_color)
 
         # Display prizes...
-        self.prize1_label.config(text=prizes[0])
-        self.prize2_label.config(text=prizes[1])
-        self.prize3_label.config(text=prizes[2])
+        self.prize1_label.config(text=prizes[0], bg=backgrounds[0])
+        self.prize2_label.config(text=prizes[1], bg=backgrounds[1])
+        self.prize3_label.config(text=prizes[2], bg=backgrounds[2])
 
         # Deduct cost of game
         current_balance -= 5 * stakes_multiplier
@@ -159,6 +164,20 @@ class Game:
 
         # Edit label so user can see their balance
         self.balance_label.configure(text=balance_statement)
+
+        if current_balance < 5 * stakes_multiplier:
+            self.play_button.config(state=DISABLED)
+            self.game_box.focus()
+            self.play_button.config(text="Game Over")
+
+            balance_statement = "Current Balance: ${}\n" \
+                                "Your balance is too low. You can only quit " \
+                                "or view your stats. Sorry about that.".format(current_balance)
+            self.balance_label.config(fg="#660O00", font="Arial 10 bold",
+                                      text=balance_statement)
+
+    def to_quit(self):
+        root.destroy()
 
 
 # main routine
