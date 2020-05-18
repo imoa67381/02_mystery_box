@@ -25,16 +25,13 @@ class Start:
         self.start_frame.destroy()
         Game(self, stakes, starting_balance)
 
-        # hide start up window
-        root.withdraw()
-
 
 class Game:
     def __init__(self, partner, stakes, starting_balance):
         print(stakes)
         print(starting_balance)
 
-        # initialise variables
+        # **** initialise variables *******
         self.balance = IntVar()
         # Set starting balance to amount entered by user at start of game
         self.balance.set(starting_balance)
@@ -42,6 +39,9 @@ class Game:
         # Get value of stakes (use it as a multiplier when calculating winning
         self.multiplier = IntVar()
         self.multiplier.set(stakes)
+
+        # List for holding statistics
+        self.round_stats_list = []
 
         # GUI Setup
         self.game_box = Toplevel()
@@ -63,27 +63,23 @@ class Game:
         self.instructions_label.grid(row=1)
 
         # Boxes go here (row 2)
-        box_text = "Arial 16 bold"
 
         self.box_frame = Frame(self.game_frame)
         self.box_frame.grid(row=2, pady=10)
 
         photo = PhotoImage(file="question.gif")
 
-        self.prize1_label = Label(self.box_frame, text="?\n", font=box_text,
-                                  image=photo,
+        self.prize1_label = Label(self.box_frame, text="?\n", image=photo,
                                   padx=10, pady=10)
         self.prize1_label.photo = photo
         self.prize1_label.grid(row=0, column=0)
 
-        self.prize2_label = Label(self.box_frame, text="?\n", font=box_text,
-                                  image=photo,
+        self.prize2_label = Label(self.box_frame, text="?\n", image=photo,
                                   padx=10, pady=10)
         self.prize2_label.photo = photo
         self.prize2_label.grid(row=0, column=1, padx=10)
 
-        self.prize3_label = Label(self.box_frame, text="?\n", font=box_text,
-                                  image=photo,
+        self.prize3_label = Label(self.box_frame, text="?\n", image=photo,
                                   padx=10, pady=10)
         self.prize3_label.photo = photo
         self.prize3_label.grid(row=0, column=2)
@@ -137,15 +133,15 @@ class Game:
             prize_num = random.randint(1,100)
 
             if 0 < prize_num <= 5:
-                prize = PhotoImage(file="gold.gif")
+                prize = PhotoImage(file="gold_low.gif")
                 prize_list = "gold\n(${}".format(5 * stakes_multiplier)
                 round_winnings += 5 * stakes_multiplier
             elif 5 < prize_num <= 25:
-                prize = PhotoImage(file="silver.gif")
+                prize = PhotoImage(file="silver_low.gif")
                 prize_list = "silver\n(${}".format(2 * stakes_multiplier)
                 round_winnings += 2 * stakes_multiplier
             elif 25 < prize_num <= 65:
-                prize = PhotoImage(file="copper.gif")
+                prize = PhotoImage(file="copper_low.gif")
                 prize_list = "gold\n(${}".format(1 * stakes_multiplier)
                 round_winnings += stakes_multiplier
             else:
@@ -180,6 +176,16 @@ class Game:
                             "Current Balance: ${}".format(5 * stakes_multiplier,
                                                           round_winnings,
                                                           current_balance)
+
+        # Add round results to statistics list
+        round_summary = "{} | {} | {} - Cost: ${} | " \
+                        "Payback: ${} | Current Balance: " \
+                        "${}".format(stats_prizes[0], stats_prizes[1],
+                                     stats_prizes[2],
+                                     5 * stakes_multiplier,round_winnings,
+                                     current_balance)
+        self.round_stats_list.append(round_summary)
+        print(self.round_stats_list)
 
         # Edit label so user can see their balance
         self.balance_label.configure(text=balance_statement)
