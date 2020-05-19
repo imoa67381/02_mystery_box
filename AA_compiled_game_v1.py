@@ -301,11 +301,11 @@ class Game:
                 round_winnings += 5 * stakes_multiplier
             elif 5 < prize_num <= 25:
                 prize = PhotoImage(file="silver_low.gif")
-                prize_list = "silver\n(${}".format(2 * stakes_multiplier)
+                prize_list = "silver\n(${})".format(2 * stakes_multiplier)
                 round_winnings += 2 * stakes_multiplier
             elif 25 < prize_num <= 65:
                 prize = PhotoImage(file="copper_low.gif")
-                prize_list = "gold\n(${}".format(1 * stakes_multiplier)
+                prize_list = "gold\n(${})".format(1 * stakes_multiplier)
                 round_winnings += stakes_multiplier
             else:
                 prize = PhotoImage(file="lead.gif")

@@ -87,7 +87,7 @@ class Game:
         # Play button goes here (row 3)
         self.play_button = Button(self.game_frame, text="Open Boxes",
                                   bg="#FFFF33", font="Arial 15 bold", width=20,
-                                  padx=10, pady=10,cpmmand=self.reveal_boxes)
+                                  padx=10, pady=10,command=self.reveal_boxes)
         self.play_button.grid(row=3)
 
         # Balance Label (row 4)
@@ -116,7 +116,7 @@ class Game:
 
         # Quit Button
         self.quit_button = Button(self.game_frame, text="Quit", fg="white",
-                                  bg="#66O000", font="Arial 15 bold", width=20,
+                                  bg="#660000", font="Arial 15 bold", width=20,
                                   command=self.to_quit, padx=10, pady=10)
         self.quit_button.grid(row=6, pady=10)
 
@@ -134,15 +134,15 @@ class Game:
 
             if 0 < prize_num <= 5:
                 prize = PhotoImage(file="gold_low.gif")
-                prize_list = "gold\n(${}".format(5 * stakes_multiplier)
+                prize_list = "gold\n(${})".format(5 * stakes_multiplier)
                 round_winnings += 5 * stakes_multiplier
             elif 5 < prize_num <= 25:
                 prize = PhotoImage(file="silver_low.gif")
-                prize_list = "silver\n(${}".format(2 * stakes_multiplier)
+                prize_list = "silver\n(${})".format(2 * stakes_multiplier)
                 round_winnings += 2 * stakes_multiplier
             elif 25 < prize_num <= 65:
                 prize = PhotoImage(file="copper_low.gif")
-                prize_list = "gold\n(${}".format(1 * stakes_multiplier)
+                prize_list = "gold\n(${})".format(1 * stakes_multiplier)
                 round_winnings += stakes_multiplier
             else:
                 prize = PhotoImage(file="lead.gif")
@@ -182,7 +182,7 @@ class Game:
                         "Payback: ${} | Current Balance: " \
                         "${}".format(stats_prizes[0], stats_prizes[1],
                                      stats_prizes[2],
-                                     5 * stakes_multiplier,round_winnings,
+                                     5 * stakes_multiplier, round_winnings,
                                      current_balance)
         self.round_stats_list.append(round_summary)
         print(self.round_stats_list)

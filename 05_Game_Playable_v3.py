@@ -22,7 +22,7 @@ class Start:
         Game(self, stakes, starting_balance)
 
         # hide start up window
-        root.withdraw()
+        self.start_frame.destroy
 
 
 class Game:
@@ -80,7 +80,7 @@ class Game:
         # Play button goes here (row 3)
         self.play_button = Button(self.game_frame, text="Open Boxes",
                                   bg="#FFFF33", font="Arial 15 bold", width=20,
-                                  padx=10, pady=10,cpmmand=self.reveal_boxes)
+                                  padx=10, pady=10, command=self.reveal_boxes)
         self.play_button.grid(row=3)
 
         # Balance Label (row 4)
@@ -109,7 +109,7 @@ class Game:
 
         # Quit Button
         self.quit_button = Button(self.game_frame, text="Quit", fg="white",
-                                  bg="#66O000", font="Arial 15 bold", width=20,
+                                  bg="#660000", font="Arial 15 bold", width=20,
                                   command=self.to_quit, padx=10, pady=10)
         self.quit_button.grid(row=6, pady=10)
 

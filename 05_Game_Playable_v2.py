@@ -80,7 +80,7 @@ class Game:
         # Play button goes here (row 3)
         self.play_button = Button(self.game_frame, text="Open Boxes",
                                   bg="#FFFF33", font="Arial 15 bold", width=20,
-                                  padx=10, pady=10,cpmmand=self.reveal_boxes)
+                                  padx=10, pady=10, command=self.reveal_boxes)
         self.play_button.grid(row=3)
 
         # Balance Label (row 4)
@@ -125,13 +125,13 @@ class Game:
             prize_num = random.randint(1,100)
 
             if 0 < prize_num <= 5:
-                prize = "gold\n(${}".format(5 * stakes_multiplier)
+                prize = "gold\n(${})".format(5 * stakes_multiplier)
                 round_winnings += 5 * stakes_multiplier
             elif 5 < prize_num <= 25:
-                prize = "silver\n(${}".format(2 * stakes_multiplier)
+                prize = "silver\n(${})".format(2 * stakes_multiplier)
                 round_winnings += 2 * stakes_multiplier
             elif 25 < prize_num <= 65:
-                prize = "gold\n(${}".format(1 * stakes_multiplier)
+                prize = "gold\n(${})".format(1 * stakes_multiplier)
                 round_winnings += stakes_multiplier
             else:
                 prize = "lead\n($0)"
