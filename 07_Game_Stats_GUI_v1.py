@@ -38,7 +38,7 @@ class Game:
         self.stats_button = Button(self.game_frame,
                                    text="Game Stats",
                                    font="Arial 14", padx=10, pady=10,
-                                   command=lambda: self.to_stats(self.round_stats_list))
+                                   command=lambda: self.to_stats(self.round_stats_list, self.game_stats_list))
         self.stats_button.grid(row=1)
 
     def to_stats(self, game_history, game_stats):
@@ -69,8 +69,8 @@ class GameStats:
         self.stats_frame.grid()
 
         # Set up Help heading (row 0)
-        self.stats_heading_label= Label(self.stats_frame, text="Game Statistics",
-                                        font="arial 19 bold")
+        self.stats_heading_label = Label(self.stats_frame, text="Game Statistics",
+                                         font="arial 19 bold")
         self.stats_heading_label.grid(row=0)
 
         # To Export <instructions> (row 1)
@@ -93,12 +93,12 @@ class GameStats:
         self.start_balance_label = Label(self.details_frame,
                                          text="Starting Balance:", font=heading,
                                          anchor="e")
-        self.start_balance_label.grid(row=0, column=1, padx=0)
+        self.start_balance_label.grid(row=0, column=0, padx=0)
 
         self.start_balance_value_label = Label(self.details_frame, font=content,
                                                text="${}".format(game_stats[0]),
                                                anchor="w")
-        self.start_balance_value_label.grid(row=1, column=1, padx=0)
+        self.start_balance_value_label.grid(row=0, column=1, padx=0)
 
         # Current Balance (row 2.2)
         self.current_balance_label = Label(self.details_frame,
@@ -107,7 +107,7 @@ class GameStats:
         self.current_balance_label.grid(row=1, column=0, padx=0)
 
         self.current_balance_value_label = Label(self.details_frame, font=content,
-                                                 text="${}".format(game_stats[1])),
+                                                 text="${}".format(game_stats[1]), anchor="w")
         self.current_balance_value_label.grid(row=1, column=1, padx=0)
 
         if game_stats[1] > game_stats[0]:
@@ -142,11 +142,31 @@ class GameStats:
             self.games_played_value_label.grid(row=4, column=1, padx=0)
 
             # Dismiss button (row 3)
+            self.export_dismiss_frame = Frame(self.stats_frame)
+            self.export_dismiss_frame.grid(row=3)
+
+            # Export Button
+            self.export_button = Button(self.export_dismiss_frame, text="Export...",
+                                        font="Arial 15 bold", bg="#003366", fg="white")
+            self.export_button.grid(row=0, column=0, padx=5)
+
+            # Dismiss Button
+            self.dismiss_button = Button(self.export_dismiss_frame, text="Dismiss",
+                                         font="Arial 15 bold", bg="#660000", fg="white",
+                                         command=partial(self.close_stats, partner))
+            self.dismiss_button.grid(row=0, column=1, pady=10)
+
+        # Dismiss Button
+
+    def close_stats(self, partner):
+        # Put help button back to normal...
+        partner.stats_button.config(state=NORMAL)
+        self.stats_box.destroy()
 
 
 # main routine
 if __name__ == "__main__":
     root = Tk()
     root.title("Mystery Box Game")
-    Start(root)
+    something = Game()
     root.mainloop()

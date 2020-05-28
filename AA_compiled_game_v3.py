@@ -465,12 +465,12 @@ class GameStats:
         self.start_balance_label = Label(self.details_frame,
                                          text="Starting Balance:", font=heading,
                                          anchor="e")
-        self.start_balance_label.grid(row=0, column=1, padx=0)
+        self.start_balance_label.grid(row=0, column=0, padx=0)
 
         self.start_balance_value_label = Label(self.details_frame, font=content,
                                                text="${}".format(game_stats[0]),
                                                anchor="w")
-        self.start_balance_value_label.grid(row=1, column=1, padx=0)
+        self.start_balance_value_label.grid(row=0, column=1, padx=0)
 
         # Current Balance (row 2.2)
         self.current_balance_label = Label(self.details_frame,
@@ -479,7 +479,7 @@ class GameStats:
         self.current_balance_label.grid(row=1, column=0, padx=0)
 
         self.current_balance_value_label = Label(self.details_frame, font=content,
-                                                 text="${}".format(game_stats[1])),
+                                                 text="${}".format(game_stats[1]), anchor="w"),
         self.current_balance_value_label.grid(row=1, column=1, padx=0)
 
         if game_stats[1] > game_stats[0]:
@@ -513,7 +513,27 @@ class GameStats:
                                                   anchor="w")
             self.games_played_value_label.grid(row=4, column=1, padx=0)
 
-            # Dismiss Button (row=3)
+            # Dismiss button (row 3)
+            self.export_dismiss_frame = Frame(self.stats_frame)
+            self.export_dismiss_frame.grid(row=3)
+
+            # Export Button
+            self.export_button = Button(self.export_dismiss_frame, text="Export...",
+                                        font="Arial 15 bold", bg="#003366", fg="white")
+            self.export_button.grid(row=0, column=0, padx=5)
+
+            # Dismiss Button
+            self.dismiss_button = Button(self.export_dismiss_frame, text="Dismiss",
+                                         font="Arial 15 bold", bg="#660000", fg="white",
+                                         command=partial(self.close_stats, partner))
+            self.dismiss_button.grid(row=0, column=1, pady=10)
+
+            # Dismiss Button
+
+        def close_stats(self, partner):
+            # Put help button back to normal...
+            partner.stats_button.config(state=NORMAL)
+            self.stats_box.destroy()
 
 # main routine
 if __name__ == "__main__":
