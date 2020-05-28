@@ -83,6 +83,12 @@ class Game:
                                   padx=10, pady=10, command=self.reveal_boxes)
         self.play_button.grid(row=3)
 
+        # bind button to <enter> (users can push enter to reveal the boxes)
+
+        self.play_button.focus()
+        self.play_button.bind('<Return>', lambda e: self.reveal_boxes())
+        self.play_button.grid(row=3)
+
         # Balance Label (row 4)
 
         start_text = "Game Cost: ${} \n "" \nHow much " \
@@ -145,7 +151,9 @@ class Game:
 
         # Display prizes...
         self.prize1_label.config(text=prizes[0], bg=backgrounds[0])
+
         self.prize2_label.config(text=prizes[1], bg=backgrounds[1])
+
         self.prize3_label.config(text=prizes[2], bg=backgrounds[2])
 
         # Deduct cost of game
@@ -173,7 +181,7 @@ class Game:
             balance_statement = "Current Balance: ${}\n" \
                                 "Your balance is too low. You can only quit " \
                                 "or view your stats. Sorry about that.".format(current_balance)
-            self.balance_label.config(fg="#660O00", font="Arial 10 bold",
+            self.balance_label.config(fg="#660000", font="Arial 10 bold",
                                       text=balance_statement)
 
     def to_quit(self):

@@ -82,7 +82,13 @@ class Game:
         # Play button goes here (row 3)
         self.play_button = Button(self.game_frame, text="Open Boxes",
                                   bg="#FFFF33", font="Arial 15 bold", width=20,
-                                  padx=10, pady=10,cpmmand=self.reveal_boxes)
+                                  padx=10, pady=10, command=self.reveal_boxes)
+        self.play_button.grid(row=3)
+
+        # bind button to <enter> (users can push enter to reveal the boxes)
+
+        self.play_button.focus()
+        self.play_button.bind('<Return>', lambda e: self.reveal_boxes())
         self.play_button.grid(row=3)
 
         # Balance Label (row 4)
@@ -96,6 +102,7 @@ class Game:
         self.balance_label.grid(row=4, pady=10)
 
         # Help and Game Stats button (row 5)
+
         self.help_export_frame = Frame(self.game_frame)
         self.help_export_frame.grid(row=5, pady=10)
 
@@ -111,7 +118,7 @@ class Game:
 
         # Quit Button
         self.quit_button = Button(self.game_frame, text="Quit", fg="white",
-                                  bg="#66O000", font="Arial 15 bold", width=20,
+                                  bg="#660000", font="Arial 15 bold", width=20,
                                   command=self.to_quit, padx=10, pady=10)
         self.quit_button.grid(row=6, pady=10)
 
@@ -175,7 +182,7 @@ class Game:
             balance_statement = "Current Balance: ${}\n" \
                                 "Your balance is too low. You can only quit " \
                                 "or view your stats. Sorry about that.".format(current_balance)
-            self.balance_label.config(fg="#660O00", font="Arial 10 bold",
+            self.balance_label.config(fg="#660000", font="Arial 10 bold",
                                       text=balance_statement)
 
     def to_quit(self):

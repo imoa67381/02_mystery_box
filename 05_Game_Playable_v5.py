@@ -12,7 +12,7 @@ class Start:
         self.start_frame = Frame(parent)
         self.start_frame.grid()
 
-        self.push_me_button = Button(self.start_frame, text="Push Me",
+        self.push_me_button = Button(self.start_frame, text="Push Now",
                                      command=self.to_game)
         self.push_me_button.grid(row=1)
 
@@ -45,6 +45,12 @@ class Game:
 
         # GUI Setup
         self.game_box = Toplevel()
+        self.game_frame = Frame(self.game_box)
+        self.game_frame.grid()
+
+        # IF users press cross at top, game quits
+        self.game_box.protocol('WM_DELETE_WINDOW', self.to_quit)
+
         self.game_frame = Frame(self.game_box)
         self.game_frame.grid()
 
@@ -198,7 +204,7 @@ class Game:
             balance_statement = "Current Balance: ${}\n" \
                                 "Your balance is too low. You can only quit " \
                                 "or view your stats. Sorry about that.".format(current_balance)
-            self.balance_label.config(fg="#660O00", font="Arial 10 bold",
+            self.balance_label.config(fg="#660000", font="Arial 10 bold",
                                       text=balance_statement)
 
     def to_quit(self):

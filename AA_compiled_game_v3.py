@@ -1,5 +1,5 @@
 from tkinter import *
-from functools import partial    # To prevent unwanted windows
+from functools import partial  # To prevent unwanted windows
 import random
 
 
@@ -31,7 +31,7 @@ class Start:
         self.mystery_instructions_label.grid(row=1)
 
         # Entry box, Button & Error label (row 2)
-        self.entry_error_frame= Frame(self.start_frame)
+        self.entry_error_frame = Frame(self.start_frame)
         self.entry_error_frame.grid(row=2)
 
         self.start_amount_entry = Entry(self.entry_error_frame,
@@ -198,6 +198,7 @@ class Game:
 
         # List for holding statistics
         self.round_stats_list = []
+        self.game_stats_list = [starting_balance, starting_balance]
 
         # GUI Setup
         self.game_box = Toplevel()
@@ -298,8 +299,8 @@ class Game:
         prizes = []
         stats_prizes = []
 
-        for item in range(0,3):
-            prize_num = random.randint(1,100)
+        for item in range(0, 3):
+            prize_num = random.randint(1, 100)
 
             if 0 < prize_num <= 5:
                 prize = PhotoImage(file="gold_low.gif")
@@ -340,6 +341,9 @@ class Game:
 
         # Set balance to new balance
         self.balance.set(current_balance)
+        # update game_stats_list with current balance (replace item in
+        # position 1 with current balance)
+        self.game_stats_list[1] = current_balance
 
         balance_statement = "Game Cost: ${}\nPayback: ${} \n" \
                             "Current Balance: ${}".format(5 * stakes_multiplier,
@@ -413,11 +417,107 @@ class Help:
         self.help_box.destroy()
 
 
+class GameStats:
+    def __init__(self, partner, game_history, game_stats):
+
+        print(game_history)
+
+        # disable help button
+        partner.stats_button.config(state=DISABLED)
+
+        heading = "Arial 12 bold"
+        content = "Arial 12"
+
+        # Sets up child window (ie: help box)
+        self.stats_box = Toplevel()
+
+        # IF users press cross at top, closes help and 'releases' help button
+
+        self.stats_box.protocol('WM_DELETE_WINDOW', partial(self.close_stats,
+                                                            partner))
+
+        # Set up GUI Frame
+        self.stats_frame = Frame(self.stats_box)
+        self.stats_frame.grid()
+
+        # Set up Help heading (row 0)
+        self.stats_heading_label = Label(self.stats_frame, text="Game Statistics",
+                                         font="arial 19 bold")
+        self.stats_heading_label.grid(row=0)
+
+        # To Export <instructions> (row 1)
+        self.export_instructions = Label(self.stats_frame,
+                                         text="Here are your Game Statistics."
+                                              "Please use the Export button to "
+                                              "access the results of each"
+                                              "round that you played", wrap=250,
+                                         font="arial 10 italic",
+                                         justify=LEFT, fg="green",
+                                         padx=10, pady=10)
+        self.export_instructions.grid(row=1)
+
+        # Starting balance (row 2)
+        self.details_frame = Frame(self.stats_frame)
+        self.details_frame.grid(row=2)
+
+        # Starting balance (row 2.0)
+
+        self.start_balance_label = Label(self.details_frame,
+                                         text="Starting Balance:", font=heading,
+                                         anchor="e")
+        self.start_balance_label.grid(row=0, column=1, padx=0)
+
+        self.start_balance_value_label = Label(self.details_frame, font=content,
+                                               text="${}".format(game_stats[0]),
+                                               anchor="w")
+        self.start_balance_value_label.grid(row=1, column=1, padx=0)
+
+        # Current Balance (row 2.2)
+        self.current_balance_label = Label(self.details_frame,
+                                           text="Current Balance:", font=heading,
+                                           anchor="e")
+        self.current_balance_label.grid(row=1, column=0, padx=0)
+
+        self.current_balance_value_label = Label(self.details_frame, font=content,
+                                                 text="${}".format(game_stats[1])),
+        self.current_balance_value_label.grid(row=1, column=1, padx=0)
+
+        if game_stats[1] > game_stats[0]:
+            win_loss = "Amount Won:"
+            amount = game_stats[1] - game_stats[0]
+            win_loss_fg = "green"
+        else:
+            win_loss = "Amount Won:"
+            amount = game_stats[0] - game_stats[1]
+            win_loss_fg = "#660000"
+
+            # Amount won / lost (row 2.3)
+            self.wind_loss_label = Label(self.details_frame,
+                                         text=win_loss, font=heading,
+                                         anchor="e")
+            self.wind_loss_label.grid(row=2, column=0, padx=0)
+
+            self.wind_loss_value_label = Label(self.details_frame, font=content,
+                                               text="${}".format(amount),
+                                               fg=win_loss_fg, anchor="w")
+            self.wind_loss_value_label.grid(row=2, column=1, padx=0)
+
+            # Rounds Played (row 2.4)
+            self.games_played_label = Label(self.details_frame,
+                                            text="Rounds Played:", font=heading,
+                                            anchor="e")
+            self.games_played_label.grid(row=4, column=0, padx=0)
+
+            self.games_played_value_label = Label(self.details_frame, font=content,
+                                                  text=len(game_history),
+                                                  anchor="w")
+            self.games_played_value_label.grid(row=4, column=1, padx=0)
+
+            # Dismiss Button (row=3)
+
 # main routine
 if __name__ == "__main__":
     root = Tk()
     root.title("Mystery Box Game")
     Start(root)
     root.mainloop()
-
-
