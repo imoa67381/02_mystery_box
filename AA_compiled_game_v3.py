@@ -399,24 +399,27 @@ class Help:
                                  font="arial 14 bold", )
         self.how_heading.grid(row=0)
 
-        # Help text (label, row 1)
-        self.help_text = Label(self.help_frame, text="To reveal the contents of the mystery boxes, click the "\
-                                                     "'Open Boxes' button.  If don't have enough money to play, "\
-                                                     "the button will become inactive and you will need to quite the " \
-                                                     "game.\n\n" \
-                                                     "The contents of the boxes will be added to your balance.  " \
-                                                     "The boxes could contain...\n\n" \
-                                                     "Low: Lead ($0) |  Cooper ($1) |  Silver ($2) |  Gold ($10)\n" \
-                                                     "Medium: Lead ($0) | Copper ($2) | Silver ($4) |  Gold ($25)\n" \
-                                                     "High: Lead ($0) | Copper ($5) | Silver ($10) |  Gold ($50)\n\n" \
-                                                     "If each box contains gold, you earn $30 (low stakes).  If " \
-                                                     "they contained copper, silver and gold, you would receive " \
-                                                     "$13 ($1 + $2 + $10) and so on.\n\n" \
-                                                     "If you'd like to export your game statistics and game history" \
-                                                     "to a text file, please click the 'Game Stats' button and " \
-                                                     "then follow the prompts.",
-                               justify=LEFT, width=40, wrap=250)
-        self.help_text.grid(column=0, row=1)
+
+        help_text="To reveal the contents of the mystery boxes, click the "\
+                 "'Open Boxes' button.  If don't have enough money to play, "\
+                 "the button will become inactive and you will need to quite the " \
+                 "game.\n\n" \
+                 "The contents of the boxes will be added to your balance.  " \
+                 "The boxes could contain...\n\n" \
+                 "Low: Lead ($0) |  Cooper ($1) |  Silver ($2) |  Gold ($10)\n" \
+                 "Medium: Lead ($0) | Copper ($2) | Silver ($4) |  Gold ($25)\n" \
+                 "High: Lead ($0) | Copper ($5) | Silver ($10) |  Gold ($50)\n\n" \
+                 "If each box contains gold, you earn $30 (low stakes).  If " \
+                 "they contained copper, silver and gold, you would receive " \
+                 "$13 ($1 + $2 + $10) and so on.\n\n" \
+                 "If you'd like to export your game statistics and game history" \
+                 "to a text file, please click the 'Game Stats' button and " \
+                 "then follow the prompts.",
+
+        self.help_text = Label(self.help_frame, text=help_text,
+                               justify=LEFT, wrap=400, padx=10, pady=10)
+        self.help_text.grid(row=1)
+
 
         # Dismiss button (row 2)
         self.dismiss_btn = Button(self.help_frame, text="Dismiss",
