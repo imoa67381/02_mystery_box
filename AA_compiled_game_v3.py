@@ -380,7 +380,6 @@ class Game:
 
 class Help:
     def __init__(self, partner):
-        background = "orange"
 
         # disable help button
         partner.help_button.config(state=DISABLED)
@@ -392,17 +391,31 @@ class Help:
         self.help_box.protocol('WM_DELETE_WINDOW', partial(self.close_help, partner))
 
         # Set up GUI Frame
-        self.help_frame = Frame(self.help_box, bg=background)
+        self.help_frame = Frame(self.help_box, width=300)
         self.help_frame.grid()
 
         # Set up Help heading (row 0)
         self.how_heading = Label(self.help_frame, text="Help / Instructions",
-                                 font="arial 14 bold", bg=background)
+                                 font="arial 14 bold", )
         self.how_heading.grid(row=0)
 
         # Help text (label, row 1)
-        self.help_text = Label(self.help_frame, text="hello world help me",
-                               justify=LEFT, width=40, bg=background, wrap=250)
+        self.help_text = Label(self.help_frame, text="To reveal the contents of the mystery boxes, click the "\
+                                                     "'Open Boxes' button.  If don't have enough money to play, "\
+                                                     "the button will become inactive and you will need to quite the " \
+                                                     "game.\n\n" \
+                                                     "The contents of the boxes will be added to your balance.  " \
+                                                     "The boxes could contain...\n\n" \
+                                                     "Low: Lead ($0) |  Cooper ($1) |  Silver ($2) |  Gold ($10)\n" \
+                                                     "Medium: Lead ($0) | Copper ($2) | Silver ($4) |  Gold ($25)\n" \
+                                                     "High: Lead ($0) | Copper ($5) | Silver ($10) |  Gold ($50)\n\n" \
+                                                     "If each box contains gold, you earn $30 (low stakes).  If " \
+                                                     "they contained copper, silver and gold, you would receive " \
+                                                     "$13 ($1 + $2 + $10) and so on.\n\n" \
+                                                     "If you'd like to export your game statistics and game history" \
+                                                     "to a text file, please click the 'Game Stats' button and " \
+                                                     "then follow the prompts.",
+                               justify=LEFT, width=40, wrap=250)
         self.help_text.grid(column=0, row=1)
 
         # Dismiss button (row 2)
@@ -479,7 +492,7 @@ class GameStats:
         self.current_balance_label.grid(row=1, column=0, padx=0)
 
         self.current_balance_value_label = Label(self.details_frame, font=content,
-                                                 text="${}".format(game_stats[1]), anchor="w"),
+                                                 text="${}".format(game_stats[1]), anchor="w")
         self.current_balance_value_label.grid(row=1, column=1, padx=0)
 
         if game_stats[1] > game_stats[0]:
@@ -530,10 +543,10 @@ class GameStats:
 
             # Dismiss Button
 
-        def close_stats(self, partner):
-            # Put help button back to normal...
-            partner.stats_button.config(state=NORMAL)
-            self.stats_box.destroy()
+    def close_stats(self, partner):
+        # Put help button back to normal...
+        partner.stats_button.config(state=NORMAL)
+        self.stats_box.destroy()
 
 # main routine
 if __name__ == "__main__":
