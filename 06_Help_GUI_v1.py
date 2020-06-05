@@ -46,17 +46,17 @@ class Help:
                                  font="arial 14 bold")
         self.how_heading.grid(row=0)
 
-        help_text="Choose an amount to play with and then choose the stakes. " \
-                  "Higher stakes cost more per round but you can win more as When you enter the play area, " \
-                  "you will see three mystery boxes.  To reveal the contents of the boxes, click the " \
-                  "'Open Boxes' button.  If you don't have enough money to play, " \
-                  "the button will turn red and you will need to quite the " \
-                  "game. \n\n"  \
-                  "The contents of the boxes will be added to your balance. The boxes could contain... \n\n " \
-                  "Low: Lead ($0) | Copper ($1) | Silver ($2) | Gold ($10)\n" \
-                  "Medium: Lead ($0) | Copper ($2) | Silver ($4) | Gold ($25)\nHigh: Lead ($0) | Copper ($5) " \
-                  "| Silver ($10) | Gold ($50)\n\nIf each box contains gold, you earn $30 (low stakes) . " \
-                  "If they contained copper, silver and gold, you would receive $13, ($1 + $2 + $10) and so on."
+        help_text = "Choose an amount to play with and then choose the stakes. " \
+                    "Higher stakes cost more per round but you can win more as When you enter the play area, " \
+                    "you will see three mystery boxes.  To reveal the contents of the boxes, click the " \
+                    "'Open Boxes' button.  If you don't have enough money to play, " \
+                    "the button will turn red and you will need to quite the " \
+                    "game. \n\n"  \
+                    "The contents of the boxes will be added to your balance. The boxes could contain... \n\n " \
+                    "Low: Lead ($0) | Copper ($1) | Silver ($2) | Gold ($10)\n" \
+                    "Medium: Lead ($0) | Copper ($2) | Silver ($4) | Gold ($25)\nHigh: Lead ($0) | Copper ($5) " \
+                    "| Silver ($10) | Gold ($50)\n\nIf each box contains gold, you earn $30 (low stakes) . " \
+                    "If they contained copper, silver and gold, you would receive $13, ($1 + $2 + $10) and so on."
 
         # Help text (label, row 1)
         self.help_text = Label(self.help_frame, text=help_text,

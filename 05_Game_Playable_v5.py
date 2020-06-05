@@ -8,14 +8,6 @@ import random
 class Start:
     def __init__(self, parent):
 
-        # Main Panel GUI
-        self.start_frame = Frame(parent)
-        self.start_frame.grid()
-
-        self.push_me_button = Button(self.start_frame, text="Push Now",
-                                     command=self.to_game)
-        self.push_me_button.grid(row=1)
-
     def to_game(self):
 
         # retrieve starting balance
@@ -28,8 +20,7 @@ class Start:
 
 class Game:
     def __init__(self, partner, stakes, starting_balance):
-        print(stakes)
-        print(starting_balance)
+
 
         # **** initialise variables *******
         self.balance = IntVar()
