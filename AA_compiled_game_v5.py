@@ -203,6 +203,7 @@ class Game:
 
         # List for holding statistics
         self.round_stats_list = []
+        self.game_stats_list = [starting_balance, starting_balance]
 
         # GUI Setup
         self.game_box = Toplevel()
@@ -273,12 +274,14 @@ class Game:
 
         self.help_button = Button(self.help_export_frame, text="Help / Rules",
                                   font="Arial 15 bold",
-                                  bg="#808080", fg="white")
+                                  bg="#808080", fg="white",
+                                  command=self.to_help)
         self.help_button.grid(row=0, column=0, padx=2)
 
         self.stats_button = Button(self.help_export_frame, text="Game Stats...",
                                    font="Arial 15 bold",
-                                   bg="#003366", fg="white")
+                                   bg="#003366", fg="white",
+                                   command=lambda: self.to_stats(self.round_stats_list, self.game_stats_list))
         self.stats_button.grid(row=0, column=1, padx=2)
 
         # Quit Button
@@ -455,6 +458,12 @@ class Game:
                                 "or view your stats.  Sorry about that.".format(current_balance)
             self.balance_label.config(fg="#660000", font="Arial 10 bold",
                                       text=balance_statement)
+
+    def to_stats(self, game_history, game_stats):
+        GameStats(self, game_history, game_stats)
+
+    def to_help(self):
+        get_help = Help(self)
 
     def to_quit(self):
         root.destroy()
